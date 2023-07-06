@@ -2,12 +2,10 @@
 
 using namespace nil::crypto3;
 
-constexpr size_t INPUT_SIZE = 16;
-
-[[circuit]] unsigned int circuit(
-    uint64_t left,
-    uint64_t right,
-    hashes::sha2<256>::digest_type expected
+[[circuit]] bool circuit(
+    std::vector<uint64_t> values,
+    uint64_t expected_sum,
+    typename hashes::sha2<256>::block_type expected_hash
 ) {
-    circuitImpl(left, right, expected);
+    return circuitImpl(values, expected_sum, expected_hash);
 }

@@ -7,12 +7,12 @@ using namespace nil::crypto3;
 
 #ifdef __ZKLLVM__
 template<typename HashType>
-typename HashType::digest_type hash_one(typename HashType::block_type block0) {
+typename HashType::block_type hash_one(typename HashType::block_type block0) {
       return hash<HashType>(block0);
 }
 
 template<typename HashType>
-typename HashType::digest_type hash_pair(
+typename HashType::block_type hash_pair(
     typename HashType::block_type left,
     typename HashType::block_type right
 ) {
@@ -35,7 +35,6 @@ typename HashType::digest_type hash_pair(typename HashType::block_type block0, t
 
   return accumulators::extract::hash<HashType>(acc);
 }
-#endif
 
 template<typename HashType>
 std::array<typename HashType::word_type, sizeof(uint64_t) / sizeof(typename HashType::word_type)> uint64ToLittleEndianWords(uint64_t input);
@@ -70,3 +69,4 @@ typename HashType::block_type padAndJoinToBlock(
         padTo<typename HashType::word_type, InSize2, half_block_length>(input2, 0)
     );
 }
+#endif
